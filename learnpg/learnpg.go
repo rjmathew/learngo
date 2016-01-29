@@ -10,8 +10,8 @@ const (
 	DB_USER     = "ensemble_user"
 	DB_PASSWORD = "user"
 	DB_NAME     = "ensemble"
-	DB_HOST		= "localhost"
-	DB_SCHEMA 	= "public"
+	DB_HOST		= "dev-ensembledb.studio.disney.com"
+	DB_SCHEMA 	= "showbiz_xform"
 )
 type tableInfo struct {
 	name string
@@ -50,21 +50,21 @@ func main() {
 		err = rows.Scan(&table_name)
 		go checkTable(table_name, ch, db)
 	}
-
-	iter := 0
-	for iter < counter {
+	iter := 1
+	for iter <= counter {
 		tableValue := <- ch
 		if (!tableValue.hasRows) {
 			fmt.Println(tableValue)
 		}
 		iter ++
+
 	}
 
 }
 
 func checkTable(tableName string, ch chan tableInfo, db *sql.DB) {
-
-	rows, err := db.Query("SELECT count(*) rowcount FROM " + DB_SCHEMA + "." + tableName)
+	rows, err := db.Query("SELECT count(*) rowcount FROM (select 1 from " + DB_SCHEMA + "." + tableName + "  limit 1) as t")
+	defer rows.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
