@@ -7,10 +7,10 @@ _"github.com/lib/pq"
 	"fmt"
 )
 const (
-	DB_USER     = "ensemble_user"
-	DB_PASSWORD = "user"
+	DB_USER     = "user"
+	DB_PASSWORD = "pwd"
 	DB_NAME     = "ensemble"
-	DB_HOST		= "dev-ensembledb.studio.disney.com"
+	DB_HOST		= "localhost"
 	DB_SCHEMA 	= "showbiz_xform"
 )
 type tableInfo struct {
