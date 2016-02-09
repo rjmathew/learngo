@@ -1,3 +1,5 @@
+Refer to https://cloud.google.com/appengine/docs/go/
+
 i) Run the appcfg from within the appengine folder
 ii) appcfg.py -A <YOUR_PROJECT_ID_> update appengine/
    did not work, but
